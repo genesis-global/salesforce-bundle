@@ -1,0 +1,17 @@
+{
+  "name": "genesis-global/salesforce-bundle",
+  "description": "Symfony bundle that provides OAuth2 authentication and exposes Salesforce REST API methods in OOP friendly way. ",
+  "type": "library",
+  "keywords": [ "salesforce"],
+  "license": "MIT",
+  "require": {
+    "symfony/http-kernel": "^3.2",
+    "symfony/config": "^3.2",
+    "symfony/dependency-injection": "^3.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "GenesisGlobal\\Salesforce\\SalesforceBundle\\": "src/"
+    }
+  }
+}
