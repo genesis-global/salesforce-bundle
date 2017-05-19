@@ -1,0 +1,44 @@
+services:
+    salesforce.http.client:
+        class: GenesisGlobal\Salesforce\Http\HttpfulClient
+
+# AUTHENTICATION
+    salesforce.authentication.url_generator:
+        class: GenesisGlobal\Salesforce\Authentication\SalesforceAuthenticatoruUrlGenerator
+        arguments: [ "%salesforce.authentication.endpoint%" ]
+
+    salesforce.authentication.credentials_keeper:
+        class: GenesisGlobal\Salesforce\SalesforceBundle\Authentication\UsernamePasswordCredentials
+        arguments:
+            - "%salesforce.authentication.username%"
+            - "%salesforce.authentication.password%"
+            - "%salesforce.authentication.client_id%"
+            - "%salesforce.authentication.client_secret%"
+
+    salesforce.authentication.callback:
+        class: GenesisGlobal\Salesforce\Authentication\SalesforceAuthenticationCallback
+
+    salesforce.authentication.authenticator:
+        class: GenesisGlobal\Salesforce\Authentication\SalesforceUsernamePasswordAuthenticator
+        arguments:
+            - "@salesforce.http.client"
+            - "@salesforce.authentication.url_generator"
+            - "@salesforce.authentication.credentials_keeper"
+            - "@salesforce.authentication.callback"
+
+# API
+    salesforce.client.url_generator:
+        class: GenesisGlobal\Salesforce\Client\SalesforceUrlGenerator
+        arguments:
+            - "%salesforce.rest.endpoint%"
+            - "%salesforce.rest.version%"
+
+    salesforce.client.factory:
+        class: GenesisGlobal\Salesforce\Client\SalesforceClientFactory
+
+    salesforce.client:
+        class: GenesisGlobal\Salesforce\Client\SalesforceClient
+        arguments:
+            - "@salesforce.http.client"
+            - "@salesforce.client.url_generator"
+            - "@salesforce.authentication.authenticator"

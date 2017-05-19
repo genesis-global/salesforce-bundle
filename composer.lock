@@ -4,8 +4,91 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f47154b24f0ecfaba7c57c2eb3b79a5c",
+    "content-hash": "57324df6a7bd36ad75a710fe164d225e",
     "packages": [
+        {
+            "name": "genesis-global/salesforce",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/genesis-global/salesforce.git",
+                "reference": "abee613e65ed74527ddf9def368d6f51a44a5ad8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/genesis-global/salesforce/zipball/abee613e65ed74527ddf9def368d6f51a44a5ad8",
+                "reference": "abee613e65ed74527ddf9def368d6f51a44a5ad8",
+                "shasum": ""
+            },
+            "require": {
+                "nategood/httpful": "^0.2.20"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GenesisGlobal\\Salesforce\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Provides OAuth2 authentication and exposes Salesforce REST API methods in OOP friendly way.",
+            "keywords": [
+                "salesforce"
+            ],
+            "time": "2017-05-19T07:41:39+00:00"
+        },
+        {
+            "name": "nategood/httpful",
+            "version": "0.2.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nategood/httpful.git",
+                "reference": "c1cd4d46a4b281229032cf39d4dd852f9887c0f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nategood/httpful/zipball/c1cd4d46a4b281229032cf39d4dd852f9887c0f6",
+                "reference": "c1cd4d46a4b281229032cf39d4dd852f9887c0f6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Httpful": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nate Good",
+                    "email": "me@nategood.com",
+                    "homepage": "http://nategood.com"
+                }
+            ],
+            "description": "A Readable, Chainable, REST friendly, PHP HTTP Client",
+            "homepage": "http://github.com/nategood/httpful",
+            "keywords": [
+                "api",
+                "curl",
+                "http",
+                "requests",
+                "rest",
+                "restful"
+            ],
+            "time": "2015-10-26T16:11:30+00:00"
+        },
         {
             "name": "psr/log",
             "version": "1.0.2",
