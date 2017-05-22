@@ -17,3 +17,18 @@ salesforce_api:
         endpoint: 'https://yourinstance.salesforce.com'
         
 ```
+
+Use in controller:
+
+```
+// custom class which implements SobjectInterface
+$case = new Sobject();
+$case->setName('Case');
+$case->setContent(['someField' => 'someValue']);
+
+$this->get('salesforce.service')->create($case);
+
+if ($case->getId()){
+    // if sobject has id, it means successfully insert
+}
+```

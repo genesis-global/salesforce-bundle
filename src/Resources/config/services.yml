@@ -42,3 +42,7 @@ services:
             - "@salesforce.http.client"
             - "@salesforce.client.url_generator"
             - "@salesforce.authentication.authenticator"
+
+    salesforce.service:
+        class: GenesisGlobal\Salesforce\SalesforceBundle\Service\SalesforceService
+        arguments: [ "@salesforce.client" ]
