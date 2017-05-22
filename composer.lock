@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "genesis-global/salesforce",
-            "version": "1.0.2",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/genesis-global/salesforce.git",
-                "reference": "abee613e65ed74527ddf9def368d6f51a44a5ad8"
+                "reference": "18398942b4fe2dfd9b05d822201652f663e8f61a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/genesis-global/salesforce/zipball/abee613e65ed74527ddf9def368d6f51a44a5ad8",
-                "reference": "abee613e65ed74527ddf9def368d6f51a44a5ad8",
+                "url": "https://api.github.com/repos/genesis-global/salesforce/zipball/18398942b4fe2dfd9b05d822201652f663e8f61a",
+                "reference": "18398942b4fe2dfd9b05d822201652f663e8f61a",
                 "shasum": ""
             },
             "require": {
@@ -37,7 +37,7 @@
             "keywords": [
                 "salesforce"
             ],
-            "time": "2017-05-19T07:41:39+00:00"
+            "time": "2017-05-19T07:56:50+00:00"
         },
         {
             "name": "nategood/httpful",
