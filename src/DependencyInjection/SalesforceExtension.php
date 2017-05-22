@@ -3,8 +3,10 @@
 namespace GenesisGlobal\Salesforce\SalesforceBundle\DependencyInjection;
 
 
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 /**
  * Class SalesforceExtension
@@ -12,6 +14,14 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
  */
 class SalesforceExtension extends Extension
 {
+    /**
+     * @return string
+     */
+    public function getAlias()
+    {
+        return 'salesforce';
+    }
+
     /**
      * @param array $configs
      * @param ContainerBuilder $container
@@ -31,5 +41,12 @@ class SalesforceExtension extends Extension
         // Rest
         $container->setParameter('salesforce.rest.endpoint', $config['rest']['endpoint']);
         $container->setParameter('salesforce.rest.version', $config['rest']['version']);
+
+        // load services for bundle
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../Resources/config')
+        );
+        $loader->load('services.yml');
     }
 }

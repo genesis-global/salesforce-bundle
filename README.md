@@ -1,24 +1,56 @@
 # Salesforce-bundle
 Symfony bundle for Salesforce REST client which is base on username,password authentication
 
+###Package instalation with composer
 
-Required configuration:
+```console
+$ composer require genesis-global/salesforce-bundle
 ```
-salesforce_api:
+
+
+###Enable bundle
+
+Then, enable the bundle by adding it to the list of registered bundles
+in the `app/AppKernel.php` file of your project:
+
+```php
+<?php
+// app/AppKernel.php
+
+// ...
+class AppKernel extends Kernel
+{
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+
+            new GenesisGlobal\Salesforce\SalesforceBundle\SalesforceBundle(),
+        );
+
+        // ...
+    }
+
+    // ...
+}
+```
+
+###Required configuration:
+```
+salesforce:
     authentication:
-        endpoint: 'https://login.salesforce.com/'
-        client_id: 'id'
-        client_secret:'secret'
-        username: 'name'
-        password: 'pass'
-    
+        endpoint: "https://login.salesforce.com/"
+        client_id: "id"
+        client_secret: "secret"
+        username: "name"
+        password: "pass"
     rest:
-        version:'v35.0'
-        endpoint: 'https://yourinstance.salesforce.com'
+        version: "v35.0"
+        endpoint: "https://yourinstance.salesforce.com"
         
 ```
 
-Use in controller:
+###Use in controller:
 
 ```
 // custom class which implements SobjectInterface
