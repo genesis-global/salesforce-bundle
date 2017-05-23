@@ -6,10 +6,6 @@ namespace GenesisGlobal\Salesforce\SalesforceBundle\Sobject;
  * Interface SobjectInterface
  * @package GenesisGlobal\Salesforce\SalesforceBundle\Sobject
  */
-/**
- * Interface SobjectInterface
- * @package GenesisGlobal\Salesforce\SalesforceBundle\Sobject
- */
 interface SobjectInterface
 {
     /**
@@ -24,13 +20,13 @@ interface SobjectInterface
     public function setId($id);
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getContent();
 
     /**
      * content setter
-     * @param array $content
+     * @param mixed $content
      */
     public function setContent($content);
 
