@@ -4,6 +4,7 @@ namespace GenesisGlobal\Salesforce\SalesforceBundle\Service;
 
 
 use GenesisGlobal\Salesforce\Client\SalesforceClientInterface;
+use GenesisGlobal\Salesforce\SalesforceBundle\Exception\CreateSobjectException;
 use GenesisGlobal\Salesforce\SalesforceBundle\Sobject\SobjectInterface;
 
 /**
@@ -36,9 +37,22 @@ class SalesforceService implements SalesforceServiceInterface
      */
     public function create(SobjectInterface $sObject)
     {
-        $response = $this->client->post(self::SOBJECTS_ACTION, $sObject->toArray());
+        $response = $this->client->post($this->createAction($sObject), $sObject->toArray());
         if (isset($response->body->id)) {
             $sObject->setId($response->body->id);
         }
+    }
+
+    /**
+     * @param SobjectInterface $sObject
+     * @return string
+     * @throws CreateSobjectException
+     */
+    protected function createAction(SobjectInterface $sObject)
+    {
+        if (!$sObject->getName()) {
+            throw new CreateSobjectException();
+        }
+        return self::SOBJECTS_ACTION . '/' . $sObject->getName();
     }
 }
