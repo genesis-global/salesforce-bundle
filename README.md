@@ -43,7 +43,8 @@ salesforce:
         client_id: "id"
         client_secret: "secret"
         username: "name"
-        password: "pass"
+        password: "pass",
+        security_token: '22s2sd233e3'
     rest:
         version: "v35.0"
         endpoint: "https://yourinstance.salesforce.com"
