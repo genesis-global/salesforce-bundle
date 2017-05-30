@@ -21,14 +21,16 @@ class UsernamePasswordCredentials implements CredentialsKeeperInterface
      * @param $password
      * @param $clientId
      * @param $clientSecret
+     * @param $securityToken
      */
-    public function __construct($username, $password, $clientId, $clientSecret)
+    public function __construct($username, $password, $clientId, $clientSecret, $securityToken)
     {
         $this->credentials = [
             'username' => $username,
             'password' => $password,
             'client_id' => $clientId,
-            'client_secret' => $clientSecret
+            'client_secret' => $clientSecret,
+            'security_token' => $securityToken
         ];
     }
 

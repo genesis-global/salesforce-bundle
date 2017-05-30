@@ -37,6 +37,7 @@ class SalesforceExtension extends Extension
         $container->setParameter('salesforce.authentication.client_secret', $config['authentication']['client_secret']);
         $container->setParameter('salesforce.authentication.username', $config['authentication']['username']);
         $container->setParameter('salesforce.authentication.password', $config['authentication']['password']);
+        $container->setParameter('salesforce.authentication.security_token', $config['authentication']['security_token']);
 
         // Rest
         $container->setParameter('salesforce.rest.endpoint', $config['rest']['endpoint']);
