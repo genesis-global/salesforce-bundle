@@ -40,9 +40,4 @@ interface SobjectInterface
      * @param string $name
      */
     public function setName($name);
-
-    /**
-     * @return array
-     */
-    public function toArray();
 }

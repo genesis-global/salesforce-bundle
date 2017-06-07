@@ -2,6 +2,9 @@ services:
     salesforce.http.client:
         class: GenesisGlobal\Salesforce\Http\HttpfulClient
 
+    salesforce.content_parser:
+        class: GenesisGlobal\Salesforce\SalesforceBundle\Service\ContentParser
+
 # AUTHENTICATION
     salesforce.authentication.url_generator:
         class: GenesisGlobal\Salesforce\Authentication\SalesforceAuthenticatorUrlGenerator
@@ -46,4 +49,4 @@ services:
 
     salesforce.service:
         class: GenesisGlobal\Salesforce\SalesforceBundle\Service\SalesforceService
-        arguments: [ "@salesforce.client" ]
+        arguments: [ "@salesforce.client", "@salesforce.content_parser" ]
