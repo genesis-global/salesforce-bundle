@@ -5,14 +5,14 @@ namespace GenesisGlobal\Salesforce\SalesforceBundle\Service;
 use GenesisGlobal\Salesforce\SalesforceBundle\Sobject\SobjectInterface;
 
 /**
- * Interface SalesforceServiceInterface
+ * Interface ContentParserInterface
  * @package GenesisGlobal\Salesforce\SalesforceBundle\Service
  */
-interface SalesforceServiceInterface
+interface ContentParserInterface
 {
     /**
      * @param SobjectInterface $sObject
-     * @return SobjectInterface
+     * @return array
      */
-    public function create(SobjectInterface $sObject);
+    public function getContent(SobjectInterface $sObject);
 }

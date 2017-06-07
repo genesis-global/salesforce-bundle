@@ -24,23 +24,36 @@ class SalesforceService implements SalesforceServiceInterface
     protected $client;
 
     /**
+     * @var ContentParserInterface
+     */
+    protected $contentParser;
+
+    /**
      * SalesforceService constructor.
      * @param SalesforceClientInterface $salesforceClient
+     * @param ContentParserInterface $contentParser
      */
-    public function __construct(SalesforceClientInterface $salesforceClient)
+    public function __construct(SalesforceClientInterface $salesforceClient, ContentParserInterface $contentParser)
     {
         $this->client = $salesforceClient;
+        $this->contentParser = $contentParser;
     }
 
     /**
      * @param SobjectInterface $sObject
+     * @return SobjectInterface
      */
     public function create(SobjectInterface $sObject)
     {
-        $response = $this->client->post($this->createAction($sObject), $sObject->toArray());
+        $response = $this->client->post(
+            $this->createAction($sObject),
+            $this->contentParser->getContent($sObject)
+        );
+
         if (isset($response->body->id)) {
             $sObject->setId($response->body->id);
         }
+        return $sObject;
     }
 
     /**
@@ -55,4 +68,5 @@ class SalesforceService implements SalesforceServiceInterface
         }
         return self::SOBJECTS_ACTION . '/' . $sObject->getName();
     }
+
 }
