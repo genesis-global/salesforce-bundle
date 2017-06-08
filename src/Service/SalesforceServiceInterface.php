@@ -15,4 +15,12 @@ interface SalesforceServiceInterface
      * @return SobjectInterface
      */
     public function create(SobjectInterface $sObject);
+
+    /**
+     * @param SobjectInterface $sObject
+     * @param $customIdName
+     * @param $customIdValue
+     * @return SobjectInterface
+     */
+    public function upsert(SobjectInterface $sObject, $customIdName, $customIdValue);
 }
