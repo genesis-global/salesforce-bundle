@@ -58,15 +58,40 @@ class SalesforceService implements SalesforceServiceInterface
 
     /**
      * @param SobjectInterface $sObject
+     * @param $customIdName
+     * @param $customIdValue
+     * @return SobjectInterface
+     */
+    public function upsert(SobjectInterface $sObject, $customIdName, $customIdValue)
+    {
+        $response = $this->client->patch(
+            $this->createAction($sObject, $customIdName, $customIdValue),
+            $this->contentParser->getContent($sObject)
+        );
+        if (isset($response->body->id)) {
+            $sObject->setId($response->body->id);
+        }
+        return $sObject;
+    }
+
+    /**
+     * @param SobjectInterface $sObject
+     * @param $customIdName
+     * @param $customIdValue
      * @return string
      * @throws CreateSobjectException
      */
-    protected function createAction(SobjectInterface $sObject)
+    protected function createAction(SobjectInterface $sObject, $customIdName = null, $customIdValue = null)
     {
+        $uri = '';
         if (!$sObject->getName()) {
             throw new CreateSobjectException();
         }
-        return self::SOBJECTS_ACTION . '/' . $sObject->getName();
+        $uri .= self::SOBJECTS_ACTION . '/' . $sObject->getName();
+        if ($customIdName && $customIdValue) {
+            $uri .= '/' . $customIdName . '/' .$customIdValue;
+        }
+        return $uri;
     }
 
 }
