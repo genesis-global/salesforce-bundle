@@ -54,14 +54,29 @@ salesforce:
 ###Use in controller:
 
 ```
+# CREATE RECORD
 // custom class which implements SobjectInterface
 $case = new Sobject();
 $case->setName('Case');
 $case->setContent(['someField' => 'someValue']);
 
-$this->get('salesforce.service')->create($case);
+$result = $this->get('salesforce.service')->create($case);  
 
-if ($case->getId()){
-    // if sobject has id, it means successfully insert
-}
+// get salesforce id
+$id = $result->getId();
+ 
+# UPDATE RECORD
+
+// account object
+$account = new \stdClass();
+$account->Current_Balance__c = '21023';
+$account->Current_Count_of_Deposit__c = 0;
+$account->Number_of_Active_Days__c = 12;
+ 
+// account sObject ready to send to salesforce
+$accountSobject = new Sobject();
+$accountSobject->setName('Account');
+$accountSobject->setContent($account);
+
+$result = $this->get('salesforce.service')->upsert($sObject, 'Player_Account__c', '123132');
 ```
