@@ -110,7 +110,7 @@ class SalesforceService implements SalesforceServiceInterface
     public function upsert(SobjectInterface $sObject, $customIdName, $customIdValue)
     {
         $response = $this->client->patch(
-            $this->createAction($sObject->getName(), [$customIdName => $customIdValue]),
+            $this->createAction($sObject->getName(), [ $customIdName, $customIdValue ]),
             $this->contentParser->getContent($sObject)
         );
         if (isset($response->body->id)) {
