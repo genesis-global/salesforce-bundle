@@ -18,9 +18,26 @@ interface SalesforceServiceInterface
 
     /**
      * @param SobjectInterface $sObject
-     * @param $customIdName
-     * @param $customIdValue
+     * @param $externalIdName
+     * @param $externalIdValue
      * @return SobjectInterface
      */
-    public function upsert(SobjectInterface $sObject, $customIdName, $customIdValue);
+    public function upsert(SobjectInterface $sObject, $externalIdName, $externalIdValue);
+
+    /**
+     * @param $name
+     * @param $id
+     * @param fields
+     * @return SobjectInterface
+     */
+    public function getBySobjectId($name, $id, $fields);
+
+    /**
+     * @param $name
+     * @param $externalIdName
+     * @param $externalIdValue
+     * @param $fields
+     * @return SobjectInterface
+     */
+    public function getByExternalId($name, $externalIdName, $externalIdValue, $fields);
 }

@@ -47,6 +47,12 @@ services:
             - "@salesforce.client.url_generator"
             - "@salesforce.authentication.authenticator"
 
+    salesforce.sobject_creator:
+        class: GenesisGlobal\Salesforce\SalesforceBundle\Creator\SobjectCreator
+
     salesforce.service:
         class: GenesisGlobal\Salesforce\SalesforceBundle\Service\SalesforceService
-        arguments: [ "@salesforce.client", "@salesforce.content_parser" ]
+        arguments:
+            - "@salesforce.client"
+            - "@salesforce.content_parser"
+            - "@salesforce.sobject_creator"

@@ -29,31 +29,35 @@ class ContentParser implements ContentParserInterface
      */
     protected function toArray(SobjectInterface $sObject)
     {
-        if (is_array($sObject->getContent())) {
-
-            return $sObject->getContent();
-        } elseif (is_object($sObject->getContent())) {
-
-            //
-            return (array)$sObject->getContent();
-        } elseif (is_string($sObject->getContent())) {
-
-            // decode json
-            if ($this->isJson($sObject->getContent())) {
-                return json_decode($sObject->getContent(), true);
-            }
-
-        }
-        throw new InvalidContentTypeException();
+        return self::parseToArray($sObject->getContent());
     }
 
     /**
      * @param $string
      * @return bool
      */
-    protected function isJson($string)
+    public static function isJson($string)
     {
         json_decode($string);
         return (json_last_error() === JSON_ERROR_NONE);
+    }
+
+    public static function parseToArray($data)
+    {
+        if (is_array($data)) {
+
+            return $data;
+        } elseif (is_object($data)) {
+
+            //
+            return (array)$data();
+        } elseif (is_string($data)) {
+
+            // decode json
+            if (self::isJson($data)) {
+                return json_decode($data, true);
+            }
+        }
+        throw new InvalidContentTypeException();
     }
 }
