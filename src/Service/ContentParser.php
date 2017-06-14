@@ -49,8 +49,8 @@ class ContentParser implements ContentParserInterface
             return $data;
         } elseif (is_object($data)) {
 
-            //
-            return (array)$data();
+            // typecasting here
+            return (array)$data;
         } elseif (is_string($data)) {
 
             // decode json
