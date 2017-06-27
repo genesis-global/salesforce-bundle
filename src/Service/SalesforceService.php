@@ -6,6 +6,7 @@ namespace GenesisGlobal\Salesforce\SalesforceBundle\Service;
 use GenesisGlobal\Salesforce\Client\SalesforceClientInterface;
 use GenesisGlobal\Salesforce\SalesforceBundle\Creator\SobjectCreatorInterface;
 use GenesisGlobal\Salesforce\SalesforceBundle\Exception\CreateSobjectException;
+use GenesisGlobal\Salesforce\SalesforceBundle\Exception\UpdateSobjectException;
 use GenesisGlobal\Salesforce\SalesforceBundle\Sobject\SobjectInterface;
 
 /**
@@ -99,6 +100,23 @@ class SalesforceService implements SalesforceServiceInterface
             $sObject->setId($response->body->id);
         }
         return $sObject;
+    }
+
+    /**
+     * @param $sobjectName
+     * @param $sObjectId
+     * @param $fields
+     * @throws UpdateSobjectException
+     */
+    public function update($sobjectName, $sObjectId, $fields)
+    {
+        $response = $this->client->patch(
+            $this->createAction($sobjectName, [ $sObjectId ]),
+            $this->contentParser->getContent($fields)
+        );
+        if (isset($response->body) && isset($response->body->errorCode)) {
+            throw new UpdateSobjectException($response->body->messsage);
+        }
     }
 
     /**
