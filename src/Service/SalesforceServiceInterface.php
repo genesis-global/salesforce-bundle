@@ -2,6 +2,7 @@
 
 namespace GenesisGlobal\Salesforce\SalesforceBundle\Service;
 
+use GenesisGlobal\Salesforce\SalesforceBundle\Exception\UpdateSobjectException;
 use GenesisGlobal\Salesforce\SalesforceBundle\Sobject\SobjectInterface;
 
 /**
@@ -23,6 +24,14 @@ interface SalesforceServiceInterface
      * @return SobjectInterface
      */
     public function upsert(SobjectInterface $sObject, $externalIdName, $externalIdValue);
+
+    /**
+     * @param $sobjectName
+     * @param $sObjectId
+     * @param $fields
+     * @throws UpdateSobjectException
+     */
+    public function update($sobjectName, $sObjectId, $fields);
 
     /**
      * @param $name
