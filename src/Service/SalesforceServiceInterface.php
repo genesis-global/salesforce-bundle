@@ -2,7 +2,7 @@
 
 namespace GenesisGlobal\Salesforce\SalesforceBundle\Service;
 
-use GenesisGlobal\Salesforce\SalesforceBundle\Exception\UpdateSobjectException;
+use GenesisGlobal\Salesforce\Http\Response\Response;
 use GenesisGlobal\Salesforce\SalesforceBundle\Sobject\SobjectInterface;
 
 /**
@@ -13,7 +13,7 @@ interface SalesforceServiceInterface
 {
     /**
      * @param SobjectInterface $sObject
-     * @return SobjectInterface
+     * @return Response
      */
     public function create(SobjectInterface $sObject);
 
@@ -21,7 +21,7 @@ interface SalesforceServiceInterface
      * @param SobjectInterface $sObject
      * @param $externalIdName
      * @param $externalIdValue
-     * @return SobjectInterface
+     * @return Response
      */
     public function upsert(SobjectInterface $sObject, $externalIdName, $externalIdValue);
 
@@ -29,7 +29,7 @@ interface SalesforceServiceInterface
      * @param $sobjectName
      * @param $sObjectId
      * @param $fields
-     * @throws UpdateSobjectException
+     * @return Response
      */
     public function update($sobjectName, $sObjectId, $fields);
 
@@ -37,7 +37,7 @@ interface SalesforceServiceInterface
      * @param $name
      * @param $id
      * @param fields
-     * @return SobjectInterface
+     * @return Response
      */
     public function getBySobjectId($name, $id, $fields);
 
@@ -46,7 +46,7 @@ interface SalesforceServiceInterface
      * @param $externalIdName
      * @param $externalIdValue
      * @param $fields
-     * @return SobjectInterface
+     * @return Response
      */
     public function getByExternalId($name, $externalIdName, $externalIdValue, $fields);
 }
