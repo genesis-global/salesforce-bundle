@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "genesis-global/salesforce",
-            "version": "1.0.7",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/genesis-global/salesforce.git",
-                "reference": "5a8f986be067f50ba4fc0bfe1c5e6160b6891f3b"
+                "reference": "b4eda2f34be462ed36a82d154dbe51c81cc3028b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/genesis-global/salesforce/zipball/5a8f986be067f50ba4fc0bfe1c5e6160b6891f3b",
-                "reference": "5a8f986be067f50ba4fc0bfe1c5e6160b6891f3b",
+                "url": "https://api.github.com/repos/genesis-global/salesforce/zipball/b4eda2f34be462ed36a82d154dbe51c81cc3028b",
+                "reference": "b4eda2f34be462ed36a82d154dbe51c81cc3028b",
                 "shasum": ""
             },
             "require": {
@@ -38,7 +38,7 @@
             "keywords": [
                 "salesforce"
             ],
-            "time": "2017-06-07 11:55:38"
+            "time": "2017-06-27 12:50:59"
         },
         {
             "name": "nategood/httpful",
@@ -559,16 +559,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4"
+                "reference": "f29dca382a6485c3cbe6379f0c61230167681937"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/e79d363049d1c2128f133a2667e4f4190904f7f4",
-                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f29dca382a6485c3cbe6379f0c61230167681937",
+                "reference": "f29dca382a6485c3cbe6379f0c61230167681937",
                 "shasum": ""
             },
             "require": {
@@ -580,7 +580,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -614,7 +614,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14 01:06:16"
+            "time": "2017-06-09 14:24:12"
         }
     ],
     "packages-dev": [],

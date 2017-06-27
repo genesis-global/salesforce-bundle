@@ -6,8 +6,8 @@ namespace GenesisGlobal\Salesforce\SalesforceBundle\Service;
 use GenesisGlobal\Salesforce\Client\SalesforceClientInterface;
 use GenesisGlobal\Salesforce\SalesforceBundle\Creator\SobjectCreatorInterface;
 use GenesisGlobal\Salesforce\SalesforceBundle\Exception\CreateSobjectException;
-use GenesisGlobal\Salesforce\SalesforceBundle\Exception\UpdateSobjectException;
 use GenesisGlobal\Salesforce\SalesforceBundle\Sobject\SobjectInterface;
+use GenesisGlobal\Salesforce\Http\Response\Response;
 
 /**
  * Class SalesforceService
@@ -57,37 +57,35 @@ class SalesforceService implements SalesforceServiceInterface
      * @param $externalIdName
      * @param $externalIdValue
      * @param $fields
-     * @return SobjectInterface
+     * @return Response
      */
     public function getByExternalId($name, $externalIdName, $externalIdValue, $fields)
     {
         $params = [ $externalIdName, $externalIdValue ] + [ 'fields' => $fields ];
-        $result = $this->client->get(
+        $response = $this->client->get(
             $this->createAction($name, $params)
         );
-        $sobject = $this->sobjectCreator->create($name, $result);
-        return $sobject;
+        return $response;
     }
 
     /**
      * @param $name
      * @param $id
      * @param $fields
-     * @return SobjectInterface
+     * @return Response
      */
     public function getBySobjectId($name, $id, $fields)
     {
         $params = [ $id ] + [ 'fields' => $fields ];
-        $result = $this->client->get(
+        $response = $this->client->get(
             $this->createAction($name, $params)
         );
-        $sobject = $this->sobjectCreator->create($name, $result);
-        return $sobject;
+        return $response;
     }
 
     /**
      * @param SobjectInterface $sObject
-     * @return SobjectInterface
+     * @return Response
      */
     public function create(SobjectInterface $sObject)
     {
@@ -95,18 +93,14 @@ class SalesforceService implements SalesforceServiceInterface
             $this->createAction($sObject->getName()),
             $this->contentParser->getContent($sObject)
         );
-
-        if (isset($response->body->id)) {
-            $sObject->setId($response->body->id);
-        }
-        return $sObject;
+        return $response;
     }
 
     /**
      * @param $sobjectName
      * @param $sObjectId
      * @param $fields
-     * @throws UpdateSobjectException
+     * @return Response
      */
     public function update($sobjectName, $sObjectId, $fields)
     {
@@ -114,16 +108,14 @@ class SalesforceService implements SalesforceServiceInterface
             $this->createAction($sobjectName, [ $sObjectId ]),
             $this->contentParser->getContent($fields)
         );
-        if (isset($response->body) && isset($response->body->errorCode)) {
-            throw new UpdateSobjectException($response->body->messsage);
-        }
+        return $response;
     }
 
     /**
      * @param SobjectInterface $sObject
      * @param $customIdName
      * @param $customIdValue
-     * @return SobjectInterface
+     * @return Response
      */
     public function upsert(SobjectInterface $sObject, $customIdName, $customIdValue)
     {
@@ -131,10 +123,7 @@ class SalesforceService implements SalesforceServiceInterface
             $this->createAction($sObject->getName(), [ $customIdName, $customIdValue ]),
             $this->contentParser->getContent($sObject)
         );
-        if (isset($response->body->id)) {
-            $sObject->setId($response->body->id);
-        }
-        return $sObject;
+        return $response;
     }
 
     /**
