@@ -67,6 +67,18 @@ $id = $result->getId();
  
 # UPDATE RECORD
 
+try {
+    $this->get('salesforce.service')->update('Account', '001D000000INjVe', [ 'someField' => 'someValue' ]);
+    
+} catch (UpdateSobjectException $e) {
+    
+    // update failed
+    echo $e->getMessage();
+}
+
+
+# UPSERT RECORD
+
 // account object
 $account = new \stdClass();
 $account->Current_Balance__c = '21023';
