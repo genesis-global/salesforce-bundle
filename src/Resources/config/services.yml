@@ -46,9 +46,14 @@ services:
             - "@salesforce.http.client"
             - "@salesforce.client.url_generator"
             - "@salesforce.authentication.authenticator"
+            - "@salesforce.response_creator"
 
     salesforce.sobject_creator:
         class: GenesisGlobal\Salesforce\SalesforceBundle\Creator\SobjectCreator
+
+    salesforce.response_creator:
+        class: GenesisGlobal\Salesforce\Http\Response\ResponseCreator
+        private: true
 
     salesforce.service:
         class: GenesisGlobal\Salesforce\SalesforceBundle\Service\SalesforceService
