@@ -112,7 +112,7 @@ class SalesforceService implements SalesforceServiceInterface
     {
         $response = $this->client->patch(
             $this->createAction($sobjectName, [ $sObjectId ]),
-            $this->contentParser->getContent($fields)
+            $fields
         );
         if (isset($response->body) && isset($response->body->errorCode)) {
             throw new UpdateSobjectException($response->body->messsage);
