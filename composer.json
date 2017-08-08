@@ -8,7 +8,7 @@
     "symfony/http-kernel": "^2.8",
     "symfony/config": "^2.8",
     "symfony/dependency-injection": "^2.8",
-    "genesis-global/salesforce": "^1.0"
+    "genesis-global/salesforce": "^1.1.6"
   },
   "autoload": {
     "psr-4": {
