@@ -91,4 +91,9 @@ $accountSobject->setName('Account');
 $accountSobject->setContent($account);
 
 $result = $this->get('salesforce.service')->upsert($sObject, 'Player_Account__c', '123132');
+
+# GET METADATA 
+
+$metaData = $this->get('salesforce.service')->getMetaDataForSobject('Account');
+
 ```
