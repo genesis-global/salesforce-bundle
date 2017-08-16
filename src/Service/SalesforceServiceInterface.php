@@ -52,7 +52,14 @@ interface SalesforceServiceInterface
 
     /**
      * @param $sobjectName
-     * @return mixed
+     * @return Response
      */
     public function getMetaDataForSobject($sobjectName);
+
+    /**
+     * @param $sobjectName
+     * @param $fieldNames
+     * @return array
+     */
+    public function getPickListForSobjectAndField($sobjectName, $fieldNames);
 }

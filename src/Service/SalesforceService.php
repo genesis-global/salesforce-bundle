@@ -4,7 +4,6 @@ namespace GenesisGlobal\Salesforce\SalesforceBundle\Service;
 
 
 use GenesisGlobal\Salesforce\Client\SalesforceClientInterface;
-use GenesisGlobal\Salesforce\SalesforceBundle\Creator\SobjectCreatorInterface;
 use GenesisGlobal\Salesforce\SalesforceBundle\Exception\CreateSobjectException;
 use GenesisGlobal\Salesforce\SalesforceBundle\Sobject\SobjectInterface;
 use GenesisGlobal\Salesforce\Http\Response\Response;
@@ -31,25 +30,17 @@ class SalesforceService implements SalesforceServiceInterface
     protected $contentParser;
 
     /**
-     * @var SobjectCreatorInterface
-     */
-    protected $sobjectCreator;
-
-    /**
      * SalesforceService constructor.
      * @param SalesforceClientInterface $salesforceClient
      * @param ContentParserInterface $contentParser
-     * @param SobjectCreatorInterface $sobjectCreator
      */
     public function __construct(
         SalesforceClientInterface $salesforceClient,
-        ContentParserInterface $contentParser,
-        SobjectCreatorInterface $sobjectCreator
+        ContentParserInterface $contentParser
     )
     {
         $this->client = $salesforceClient;
         $this->contentParser = $contentParser;
-        $this->sobjectCreator = $sobjectCreator;
     }
 
     /**
@@ -70,7 +61,7 @@ class SalesforceService implements SalesforceServiceInterface
 
     /**
      * @param $sobjectName
-     * @return mixed
+     * @return Response
      */
     public function getMetaDataForSobject($sobjectName)
     {
@@ -78,6 +69,51 @@ class SalesforceService implements SalesforceServiceInterface
             $this->createAction($sobjectName, ['describe'])
         );
         return $response;
+    }
+
+    /**
+     * For notice: salesforce returns picklistValues instead of pickListValues
+     *
+     * Return array eg. [
+     *      'field_1' => ['value_1', 'value2'],
+     *      'field_2' => ['value_1', 'value2'],
+     *  ]
+     * @param $sobjectName
+     * @param $fieldNames
+     * @return array
+     */
+    public function getPickListForSobjectAndField($sobjectName, $fieldNames)
+    {
+        $sobjectMeta = $this->getMetaDataForSobject($sobjectName);
+
+        $result = [];
+        if ($sobjectMeta->isSuccess() && isset($sobjectMeta->getContent()->fields)) {
+
+            foreach ($sobjectMeta->getContent()->fields as $field) {
+
+                if ( in_array($field->name, $fieldNames) && isset($field->picklistValues)) {
+
+                    $result[$field->name] = $this->parsePickListValues($field->picklistValues);
+                }
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Pick only values of active picks
+     * @param $pickListValues
+     * @return array
+     */
+    protected function parsePickListValues($pickListValues)
+    {
+        $list = [];
+        foreach ($pickListValues as $pickListValue) {
+            if ($pickListValue->active === true) {
+                $list[] = $pickListValue->value;
+            }
+        }
+        return $list;
     }
 
     /**
