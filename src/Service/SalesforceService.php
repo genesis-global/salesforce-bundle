@@ -69,6 +69,18 @@ class SalesforceService implements SalesforceServiceInterface
     }
 
     /**
+     * @param $sobjectName
+     * @return mixed
+     */
+    public function getMetaDataForSobject($sobjectName)
+    {
+        $response = $this->client->get(
+            $this->createAction($sobjectName, ['describe'])
+        );
+        return $response;
+    }
+
+    /**
      * @param $name
      * @param $id
      * @param $fields

@@ -49,4 +49,10 @@ interface SalesforceServiceInterface
      * @return Response
      */
     public function getByExternalId($name, $externalIdName, $externalIdValue, $fields);
+
+    /**
+     * @param $sobjectName
+     * @return mixed
+     */
+    public function getMetaDataForSobject($sobjectName);
 }
