@@ -72,18 +72,6 @@ class SalesforceService implements SalesforceServiceInterface
     }
 
     /**
-     * @param $value
-     * @return string
-     */
-    protected function parseVale($value)
-    {
-        if (is_string($value)) {
-            return "'" . $value . "'";
-        }
-        return $value;
-    }
-
-    /**
      * @param $name
      * @param $externalIdName
      * @param $externalIdValue
