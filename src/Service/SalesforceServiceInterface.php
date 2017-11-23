@@ -49,4 +49,12 @@ interface SalesforceServiceInterface
      * @return Response
      */
     public function getByExternalId($name, $externalIdName, $externalIdValue, $fields);
+
+    /**
+     * @param $fields
+     * @param $from
+     * @param null $conditions should be array of conditions [field => value] which parse to where+field='value'
+     * @return Response
+     */
+    public function query($fields, $from, $conditions = null);
 }
