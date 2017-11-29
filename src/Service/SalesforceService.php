@@ -125,7 +125,7 @@ class SalesforceService implements SalesforceServiceInterface
     {
         $response = $this->client->patch(
             $this->createAction($sobjectName, [ $sObjectId ]),
-            $this->contentParser->getContent($fields)
+            $fields
         );
         return $response;
     }
