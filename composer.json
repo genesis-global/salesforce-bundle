@@ -8,7 +8,7 @@
     "symfony/http-kernel": "^3.2",
     "symfony/config": "^3.2",
     "symfony/dependency-injection": "^3.2",
-    "genesis-global/salesforce": "^1.1"
+    "genesis-global/salesforce": "^1.1.6"
   },
   "require-dev": {
     "phpunit/phpunit": "~5.6"

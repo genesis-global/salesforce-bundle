@@ -44,6 +44,25 @@ class SalesforceService implements SalesforceServiceInterface
     }
 
     /**
+     * @param $fields
+     * @param $from
+     * @param null $conditions should be array of conditions [field => value] which parse to where+field='value'
+     * @return Response
+     */
+    public function query($fields, $from, $conditions = null)
+    {
+        $format = "SELECT+%s+from+%s";
+        $query = sprintf($format, implode(',', $fields), $from);
+
+        // add conditions
+        if (is_array($conditions) && !empty($conditions)) {
+            $where = "+where+%s";
+            $query = $query . sprintf($where, implode('+and+', $conditions));
+        }
+        return $this->client->get('query', $query);
+    }
+
+    /**
      * @param $name
      * @param $externalIdName
      * @param $externalIdValue
@@ -154,7 +173,7 @@ class SalesforceService implements SalesforceServiceInterface
     {
         $response = $this->client->patch(
             $this->createAction($sobjectName, [ $sObjectId ]),
-            $this->contentParser->getContent($fields)
+            $fields
         );
         return $response;
     }
