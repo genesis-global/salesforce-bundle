@@ -53,7 +53,7 @@ services:
 
     salesforce.response_creator:
         class: GenesisGlobal\Salesforce\Http\Response\ResponseCreator
-        private: true
+        public: false
 
     salesforce.service:
         class: GenesisGlobal\Salesforce\SalesforceBundle\Service\SalesforceService
