@@ -138,12 +138,15 @@ class SalesforceService implements SalesforceServiceInterface
     /**
      * @param $name
      * @param $id
-     * @param $fields
+     * @param $fields An array of fields to return. If not provided, all fields will be returned.
      * @return Response
      */
-    public function getBySobjectId($name, $id, $fields)
+    public function getBySobjectId($name, $id, $fields = [])
     {
-        $params = [ $id ] + [ 'fields' => $fields ];
+        $params = [ $id ];
+        if ($fields) {
+            $params += [ 'fields' => $fields ];
+        }
         $response = $this->client->get(
             $this->createAction($name, $params)
         );
