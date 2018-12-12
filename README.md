@@ -8,7 +8,7 @@ $ composer require genesis-global/salesforce-bundle
 ```
 
 
-###Enable bundle
+### Enable bundle
 
 Then, enable the bundle by adding it to the list of registered bundles
 in the `app/AppKernel.php` file of your project:
@@ -35,8 +35,8 @@ class AppKernel extends Kernel
 }
 ```
 
-###Required configuration:
-```
+### Required configuration:
+```yaml
 salesforce:
     authentication:
         endpoint: "https://login.salesforce.com/"
@@ -51,10 +51,10 @@ salesforce:
         
 ```
 
-###Use in controller:
+### Use in controller:
 
-```
-# CREATE RECORD
+#### CREATE RECORD
+```php
 // custom class which implements SobjectInterface
 $case = new Sobject();
 $case->setName('Case');
@@ -64,8 +64,10 @@ $result = $this->get('salesforce.service')->create($case);
 
 // get salesforce id
 $id = $result->getId();
- 
-# UPDATE RECORD
+```
+
+#### UPDATE RECORD
+```php
 
 try {
     $this->get('salesforce.service')->update('Account', '001D000000INjVe', [ 'someField' => 'someValue' ]);
@@ -75,10 +77,10 @@ try {
     // update failed
     echo $e->getMessage();
 }
+```
 
-
-# UPSERT RECORD
-
+#### UPSERT RECORD
+```php
 // account object
 $account = new \stdClass();
 $account->Current_Balance__c = '21023';
@@ -91,9 +93,10 @@ $accountSobject->setName('Account');
 $accountSobject->setContent($account);
 
 $result = $this->get('salesforce.service')->upsert($sObject, 'Player_Account__c', '123132');
+```
+#### GET METADATA 
 
-# GET METADATA 
-
+```php
 $metaData = $this->get('salesforce.service')->getMetaDataForSobject('Account');
 
 ```
