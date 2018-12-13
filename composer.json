@@ -5,8 +5,8 @@
   "keywords": [ "salesforce"],
   "license": "MIT",
   "require": {
-    "symfony/http-kernel": "^3.2|4.0",
-    "symfony/config": "^3.2|^4.0",
+    "symfony/http-kernel": "^3.2|^4.0|^4.1",
+    "symfony/config": "^3.2|^4.0|^4.1",
     "symfony/dependency-injection": "^3.2|^4.0|^4.1",
     "genesis-global/salesforce": "^1.1.6"
   },
