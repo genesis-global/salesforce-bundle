@@ -1,7 +1,7 @@
 {
   "name": "genesis-global/salesforce-bundle",
   "description": "Symfony bundle that provides OAuth2 authentication and exposes Salesforce REST API methods in OOP friendly way. ",
-  "type": "library",
+  "type": "symfony-bundle",
   "keywords": [ "salesforce"],
   "license": "MIT",
   "require": {
