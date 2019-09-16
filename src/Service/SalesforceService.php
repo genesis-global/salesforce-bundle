@@ -30,40 +30,38 @@ class SalesforceService implements SalesforceServiceInterface
     protected $contentParser;
 
     /**
+     * @var QueryBuilderInterface
+     */
+    protected $queryBuilder;
+
+    /**
      * SalesforceService constructor.
      * @param SalesforceClientInterface $salesforceClient
      * @param ContentParserInterface $contentParser
+     * @param QueryBuilderInterface $queryBuilder
      */
     public function __construct(
         SalesforceClientInterface $salesforceClient,
-        ContentParserInterface $contentParser
+        ContentParserInterface $contentParser,
+        QueryBuilderInterface $queryBuilder
     )
     {
         $this->client = $salesforceClient;
         $this->contentParser = $contentParser;
+        $this->queryBuilder = $queryBuilder;
     }
 
     /**
      * @param $fields
      * @param $from
-     * @param null $conditions should be array of conditions [field => value] which parse to where+field='value'
+     * @param null $conditions
+     * conditions can be simple like array of conditions [field => value] which parse to where+field='value'
+     * also they can be array of ready conditions like   ["RecordTypeId != 'AXZ'", .. ]
      * @return Response
      */
     public function query($fields, $from, $conditions = null)
     {
-        $format = "SELECT+%s+from+%s";
-        $query = sprintf($format, implode(',', $fields), $from);
-
-        // add conditions
-        if (is_array($conditions) && !empty($conditions)) {
-            $where = "+where+%s";
-            $cond = [];
-            foreach ($conditions as $key => $condition) {
-                $cond[] = $key . '+' . '=' . '+\'' . $condition .'\'';
-            }
-            $query = $query . sprintf($where, implode('+and+', $cond));
-        }
-        
+        $query = $this->queryBuilder->build($fields, $from, $conditions);
         return $this->client->get('query', $query);
     }
 

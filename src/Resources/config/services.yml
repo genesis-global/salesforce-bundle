@@ -55,9 +55,12 @@ services:
         class: GenesisGlobal\Salesforce\Http\Response\ResponseCreator
         public: false
 
+    salesforce.query_builder:
+        class: GenesisGlobal\Salesforce\SalesforceBundle\Service\QueryBuilder
+
     salesforce.service:
         class: GenesisGlobal\Salesforce\SalesforceBundle\Service\SalesforceService
         arguments:
             - "@salesforce.client"
             - "@salesforce.content_parser"
-            - "@salesforce.sobject_creator"
+            - "@salesforce.query_builder"
