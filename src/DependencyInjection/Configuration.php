@@ -17,10 +17,12 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
-        $root = $builder->root('salesforce');
+        $builder = new TreeBuilder('salesforce');
 
-        $root->addDefaultsIfNotSet()
+        // BC layer for symfony/config < 4.2
+        $rootNode = \method_exists($builder, 'getRootNode') ? $builder->getRootNode() : $builder->root('salesforce');
+
+        $rootNode->addDefaultsIfNotSet()
             ->children()
                 ->arrayNode('authentication')
                     ->isRequired()
