@@ -9,7 +9,7 @@
 use \GenesisGlobal\Salesforce\SalesforceBundle\Service\SalesforceService;
 use \GenesisGlobal\Salesforce\Client\SalesforceClientInterface;
 use \GenesisGlobal\Salesforce\SalesforceBundle\Service\ContentParserInterface;
-
+use \GenesisGlobal\Salesforce\SalesforceBundle\Service\QueryBuilderInterface;
 
 class SalesforceServiceTest extends \PHPUnit\Framework\TestCase
 {
@@ -17,10 +17,13 @@ class SalesforceServiceTest extends \PHPUnit\Framework\TestCase
 
     protected $parser;
 
+    protected $builder;
+
     public function setUp()
     {
         $this->client = $this->createMock(SalesforceClientInterface::class);
         $this->parser = $this->createMock(ContentParserInterface::class);
+        $this->builder = $this->createMock(QueryBuilderInterface::class);
     }
 
     public function testGetPickListForSobjectAndField()
@@ -72,7 +75,7 @@ class SalesforceServiceTest extends \PHPUnit\Framework\TestCase
         $result->setContent($content);
 
         $this->client->method('get')->willReturn($result);
-        $service = new SalesforceService($this->client, $this->parser);
+        $service = new SalesforceService($this->client, $this->parser, $this->builder);
         $result = $service->getPickListForSobjectAndField('Case', ['Type', 'Sub_Type__c', 'Internal_Owner__c']);
 
         $this->assertEquals([
